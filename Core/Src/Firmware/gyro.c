@@ -7,9 +7,9 @@ inline void gyro_cs_set(GPIO_PinState state)
 uint8_t spi_gyro_read(uint8_t address)
 {
   gyro_cs_set(GPIO_PIN_RESET);
-  uint8_t transmit[2];
-  transmit[0] = address | 0x80;
-  uint8_t receive[2];
+  uint8_t transmit[2] = {0};
+  transmit[0] = address | 0xc0;
+  uint8_t receive[2] = {0};
   HAL_SPI_TransmitReceive(&hspi1, transmit, receive, 2, 100);
   gyro_cs_set(GPIO_PIN_SET);
   return receive[1];
