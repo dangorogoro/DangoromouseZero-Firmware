@@ -39,6 +39,8 @@ extern "C" {
 #include "gpio.h"
 #include "gyro.h"
 #include "ir_sensor.h"
+#include "motor.h"
+#include <stdint.h>
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

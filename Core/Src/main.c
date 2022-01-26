@@ -122,8 +122,12 @@ int main(void)
   MX_UART4_Init();
   MX_SPI1_Init();
   MX_TIM6_Init();
+  MX_TIM8_Init();
   /* USER CODE BEGIN 2 */
-  
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5, GPIO_PIN_SET);
+  while(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5, GPIO_PIN_RESET);
+  /*
   HAL_ADC_Start(&hadc2);
   if (HAL_ADC_Start_DMA(&hadc2, (uint32_t *)g_adc_data, 5) != HAL_OK)
   {
@@ -132,14 +136,14 @@ int main(void)
   
   HAL_TIM_Base_Start_IT(&htim6);
   ir_flash_start();
-
-
-  /*
-  SEGGER_RTT_printf(0, "GYRO WHO_AM_I %d\n", spi_gyro_read(GYRO_WHO_AM_I));
-  SEGGER_RTT_printf(0, "Before %d\n", spi_gyro_read(GYRO_CTRL1));
-  set_gyro_configuration();
-  SEGGER_RTT_printf(0, "After %d\n", spi_gyro_read(GYRO_CTRL1));
   */
+  HAL_TIM_Base_Start_IT(&htim4);
+  start_encoder();
+
+  
+  SEGGER_RTT_printf(0, "GYRO WHO_AM_I %d\n", spi_gyro_read(GYRO_WHO_AM_I));
+  set_gyro_configuration();
+  
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -158,9 +162,15 @@ int main(void)
     SEGGER_RTT_printf(0, "GYRO WHO_AM_I %d\n", spi_gyro_read(WHO_AM_I));
     */
     /*
-    SEGGER_RTT_printf(0, "GYRO %d\n", read_gyro_z());
-    SEGGER_RTT_printf(0, "Config %d\n", spi_gyro_read(GYRO_CTRL1));
+    while(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET){
+      stop_motor();
+    }
+    set_motor_pulse(50,50);
     */
+    SEGGER_RTT_printf(0, "TIM3: %d, TIM4: %d\n", TIM2->CNT, TIM8->CNT);
+    
+    /*
+    SEGGER_RTT_printf(0, "GYRO %d\n", read_gyro_z());
     SEGGER_RTT_printf(0, "ADC %d %d %d %d\n", 
     ir_sensor_value[0], 
     ir_sensor_value[1], 
@@ -170,8 +180,9 @@ int main(void)
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, ir_sensor_value[1] >= 2600);//Right front
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, ir_sensor_value[2] >= 2200);//Left
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, ir_sensor_value[3] >= 2200);//Right
+    */
 
-    HAL_Delay(200);
+    HAL_Delay(100);
   }
   /* USER CODE END 3 */
 }
