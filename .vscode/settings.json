@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "gyro.h": "c",
+        "main.h": "c",
+        "stdio.h": "c",
+        "motor.h": "c"
+    }
+}
