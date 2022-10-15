@@ -8,9 +8,11 @@
             "command": "make",
             "args": [
                 "all",
+                "GCC_PATH=~/bin/gcc-arm-none-eabi/gcc-arm-none-eabi-10.3-2021.10/bin"
             ],
             "options": {
                 "env": {
+                    
                 }
             },
             "problemMatcher": [

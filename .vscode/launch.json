@@ -4,11 +4,13 @@
         {
             "name": "Cortex Debug",
             "cwd": "${workspaceRoot}",
-            "executable": "${workspaceFolder}/build/${workspaceFolderBasename}.elf",
+            "executable": "${workspaceFolder}/build/strawberry.elf",
             "request": "launch",
             "type": "cortex-debug",
+            "armToolchainPath": "/home/dangorogoro/bin/gcc-arm-none-eabi/gcc-arm-none-eabi-10.3-2021.10/bin",
             "preLaunchTask": "Build project",
-            "serverpath": "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
+            "serverpath": "/opt/SEGGER/JLink/JLinkGDBServer",
+            "ipAddress": "172.31.64.1",
             "servertype": "jlink",
             "device": "STM32F405RG",
             "interface": "swd"
