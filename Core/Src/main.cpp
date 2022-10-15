@@ -186,10 +186,12 @@ int main(void)
                       ir_sensor_value[1],
                       ir_sensor_value[2],
                       ir_sensor_value[3]);
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, ir_sensor_value[0] >= 2300); // Left front
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, ir_sensor_value[1] >= 2600); // Right front
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, ir_sensor_value[2] >= 2200); // Left
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, ir_sensor_value[3] >= 2200); // Right
+    
+
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, ir_sensor_value[0] >= 2300 ? GPIO_PIN_SET: GPIO_PIN_RESET); // Left front
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, ir_sensor_value[1] >= 2600 ? GPIO_PIN_SET: GPIO_PIN_RESET); // Right front
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, ir_sensor_value[2] >= 2200 ? GPIO_PIN_SET: GPIO_PIN_RESET); // Left
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, ir_sensor_value[3] >= 2200 ? GPIO_PIN_SET: GPIO_PIN_RESET); // Right
 
     HAL_Delay(100);
   }
